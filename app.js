@@ -100,9 +100,10 @@ app.controller('HomeController',['$scope', 'RestApi', '$location', function($sco
     $scope.getUserPosts = function(uid, uname){
         $scope.selectedUid = uid;
         $scope.selectedUsername = uname;
-        $scope.getMailsList();
         $scope.search = uname;
         $scope.userData = '';
+        $scope.getMailsList();
+        $location.path("/mail");
     }
 
     // view mail
