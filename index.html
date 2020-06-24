@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">    
+        <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body ng-app="mainApp">
+        <div class="container col-lg-12" ng-controller="HomeController">
+            <!-- Search control start -->
+            <div  class="row mt-2">
+                <div class="col-lg-12" class="searchDiv">
+                    <input class="form-control" type="text" name="search" ng-model="search"
+                    ng-keypress ="getSearchResults(search)"
+                    placeholder="Search here..." /> 
+                    <button ng-if="search" type="button" class="close c-pos" aria-label="Close" ng-click="clear()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div ng-if="userData" class="autocomplete" name="autocomplete">
+                    <ul class="list-unstyled p-1">
+                        <li ng-repeat="r in userData | filter:search"
+                            ng-click="getUserPosts(r.id, r.name)"                        
+                        >{{ r.name }}</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Search control end -->
+            <div class="row ml-0 mt-4">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <!-- Sidebar start -->            
+                        <div class="col-lg-2 bg-light border-right" id="sidebar-wrapper">
+                            <div class="list-group list-group-flush">
+                                <a ui-sref="mail" class="list-group-item list-group-item-action bg-light">Inbox</a>
+                                <a ui-sref="sent" class="list-group-item list-group-item-action bg-light">Sent</a>
+                                <a ui-sref="drafts" class="list-group-item list-group-item-action bg-light">Drafts</a>
+                                <a ui-sref="spam" class="list-group-item list-group-item-action bg-light">Spam</a>
+                                <a ui-sref="trash" class="list-group-item list-group-item-action bg-light">Trash</a>
+                            </div>
+                        </div>
+                        <!-- Sidebar end -->
+                        <!-- Content start -->
+                        <div class="col-lg-10">
+                            <div ui-view></div>
+                        </div>
+                        <!-- Content end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="app.js"></script>
+    </body>
+</html>

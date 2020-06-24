@@ -1,0 +1,12 @@
+<div>
+    <div ng-if="selectedUid">
+        Posts by : <strong>{{ selectedUsername }}</strong>
+    </div>
+    <ul class="list-unstyled">
+        <li ng-repeat="m in mailsList | limitTo: 30 | filter:{userId: selectedUid}" ng-click="viewMail(m.id)">
+            <div class="row-item">
+                {{m.title | capitalize}}
+            </div>
+        </li>
+    </ul>
+</div>
